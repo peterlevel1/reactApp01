@@ -110,3 +110,4 @@ var { 0: a11, [arr.length - 1]: b11 } = arr;
 
 console.log(a11, b11);
 
+// =========
