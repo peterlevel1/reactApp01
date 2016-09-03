@@ -1,3 +1,5 @@
+"use strict";
+
 // strings
 
 var [a, b, c, d, e] = 'hahao';
