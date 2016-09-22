@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress --colors",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base dist",
-    "serve": "webpack-dev-server --progress --colors --inline --hot --content-base dist"
+    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base ./",
+    "serve": "webpack-dev-server --progress --colors --inline --hot --content-base ./"
   },
   "author": "jx",
   "license": "ISC",
