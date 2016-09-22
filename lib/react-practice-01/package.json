@@ -1,0 +1,29 @@
+{
+  "name": "survivejs-react",
+  "private": true,
+  "version": "2.5.6",
+  "description": "SurviveJS - React",
+  "author": "Juho Vepsalainen <info@survivejs.com>",
+  "scripts": {
+    "test": "check-markdown-links manuscript"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "check-markdown-links": "^0.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/survivejs/react.git"
+  },
+  "homepage": "https://survivejs.com",
+  "bugs": {
+    "url": "https://github.com/survivejs/react/issues"
+  },
+  "keywords": [
+    "javascript",
+    "webpack",
+    "react",
+    "book"
+  ],
+  "license": "CC BY-NC-ND"
+}
