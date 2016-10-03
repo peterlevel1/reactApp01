@@ -33,22 +33,32 @@ li {
   align-items: flex-start;
 }
 
+@block-cell-width = 50px;
+@block-cell-height = 50px;
+@block-cell-border-radius = 5px;
+@block-cell-background-color = #BF0349;
+@block-cell-gap = 10px;
+
 .block-row {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  padding-top: @block-cell-gap;
 }
 
 .block-cell {
-  
+  width: @block-cell-width;
+  height: @block-cell-height;
+  border-radius: @block-cell-border-radius;
+  background-color: @block-cell-background-color;
+  & + .block-cell {
+    margin-left: @block-cell-gap;
+  }
 }
 
-.view-main {
-  position: relative;
-}
+.view-main {}
 
 .view-aside {
-  position: relative;
   margin-left: 50px;
 
   > header {

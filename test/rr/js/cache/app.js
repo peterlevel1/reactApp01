@@ -83,6 +83,7 @@ let ViewContentBackgroundBlocks = createClass({
           </li>
         )
       }
+       
 
       rowStyle = assign({}, configStyle.row, {
         top: i * (I_CELL_HEIGHT + I_GAP)

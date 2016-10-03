@@ -2,3 +2,5 @@ node_modules
 .git
 .idea
 snippets
+jsconfig.json
+.vscode
