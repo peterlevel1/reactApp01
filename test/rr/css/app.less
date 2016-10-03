@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  min-height: 1px;
+}
+
+.app-container {
+  .container;
+}
+
+.view-header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.block-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.block-cell {
+  
+}
+
+.view-main {
+  position: relative;
+}
+
+.view-aside {
+  position: relative;
+  margin-left: 50px;
+
+  > header {
+    width: 100%;
+    h1 {
+      text-align: left;
+      padding-left: 10px;
+    }
+  }
+}

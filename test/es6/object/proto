@@ -1,0 +1,7 @@
+'use strict'
+
+let obj = Object.assign({}, null)
+
+let testObjProto = Object.getPrototypeOf(obj)
+
+console.log(testObjProto)
