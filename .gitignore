@@ -4,3 +4,4 @@ node_modules
 snippets
 jsconfig.json
 .vscode
+.cache
