@@ -5,11 +5,8 @@ let ViewAside = createClass({
 
   getDefaultProps() {
     return {
-      rows: blockController.getContainerRows(
-        I_ASIDE_ROWS,
-        I_ASIDE_CELLS_EACH_ROW,
-        configStyle.cell
-      ),
+      config: null,
+      rows: null,
       block: null,
       points: null
     }
@@ -28,9 +25,9 @@ let ViewAside = createClass({
         <header>
           <h1>分数: {this.props.points}</h1>
         </header>
-        <ul>
-          {this.getCells()}
-        </ul>
+        <section>
+          {this.getRenderRows()}
+        </section>
       </div>
     )
   }

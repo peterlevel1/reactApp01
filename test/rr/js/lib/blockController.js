@@ -1,7 +1,8 @@
 import { assign, getId } from './util'
+import configShape from '../configs/shape'
+import configBlock from '../configs/block'
 
 export default {
-
 
   getContainerRows(lenRows, lenCells) {
     let row, rows = []
@@ -17,7 +18,7 @@ export default {
     return rows
   },
 
-  getPositionByStart({start, coordinates}) {
+  getPositionByStart(start, coordinates) {
     //[
     //  // each row and cells
     //  [1, 1, 1, 1]
@@ -46,7 +47,14 @@ export default {
   },
 
   /**
-   *
+   * @param {Array} start
+   * @return {Object}
+   *  - start
+   *  - index
+   *  - position
+   *  - coordinates
+   *  - style
+   *  - shape
    */
   getRandomBlock(start) {
     // debugger;
@@ -60,10 +68,7 @@ export default {
     let indexCoordinatesRandom = Math.floor(Math.random() * blocks.length)
     let coordinates = blocks[indexCoordinatesRandom]
 
-    let position = blockController.getPosition({
-      start: start,
-      coordinates: coordinates
-    })
+    let position = blockController.getPositionByStart(start, coordinates)
 
     return {
       // may change when key up event happen
@@ -119,7 +124,7 @@ export default {
 
       data.occupied = true
       data.style = data.style || {}
-      assign(data.style, style)
+      assign(data.style, block.style)
     })
   },
 
@@ -151,11 +156,11 @@ export default {
 
       for (let k = 0, kk = row.length; k < kk; k++) {
         cell = row[k]
-        jsxRow.push(<li className="block-cell" key={getId()}></li>)
+        jsxRow.push(<li className={configBlock.classNames.cell} key={getId()}></li>)
       }
 
       jsxRows.push(
-        <ul className="block-row" key={getId()}>
+        <ul className={configBlock.classNames.row} key={getId()}>
           {jsxRow}
         </ul>
       )

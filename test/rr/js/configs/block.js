@@ -12,5 +12,6 @@ export default {
   classNames: {
     cell: 'block-cell',
     row: 'block-row'
-  }
+  },
+  speed: 1000 * 1
 }

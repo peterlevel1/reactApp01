@@ -12,28 +12,26 @@ let ViewMain = createClass({
 
   getDefaultProps() {
     return {
-      rows: blockController.getContainerRows(
-        I_MAIN_ROWS,
-        I_MAIN_CELLS_EACH_ROW,
-        configStyle.cell
-      ),
-      block: null
+      config: null,
+      rows: null,
+      block: null,
+      direction: null
     }
   },
 
-  testCollision(start) {
+  testCollision(start, coordinates) {
     if (!this.props.block) return false
 
     this.clearBlockData()
 
-    let nextBlockPosition = blockController.getPosition({
-      start: start,
-      coordinates: coordinates
-    })
+    let nextBlockPosition = blockController.getPosition(
+      start,
+      coordinates
+    )
 
     let ret = blockController.testCollision(
       this.props.rows,
-      nextBlockPosition
+      { position: nextBlockPosition }
     )
 
     this.setBlockData()
@@ -57,9 +55,9 @@ let ViewMain = createClass({
 
     return (
       <div className="view-main">
-        <ul>
-          {this.getCells()}
-        </ul>
+        <section>
+          {this.getRenderRows()}
+        </section>
       </div>
     )
   }

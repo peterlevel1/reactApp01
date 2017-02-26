@@ -1,10 +1,13 @@
 import { createClass } from 'react'
+import { assign } from '../lib/util'
+import blockController from '../lib/blockController'
 
 let ViewContent = createClass({
   getDefaultProps() {
     return {
       timer: null,
-      interval: 1000
+      // will receive from parent component
+      config: null
     }
   },
 
@@ -13,35 +16,54 @@ let ViewContent = createClass({
       points: 0,
       mainBlock: null,
       asideBlock: null,
-      direction: 'down',
-      mainStart: []
+      direction: 'down'
     }
   },
 
   componentWillMount() {
     this.setState({
       asideBlock: this.getAsideBlock(),
-      mainBlock: null,
-      mainStart: configMain.start.slice()
+      mainBlock: null
     })
+  },
+ 
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      if (!this.state.mainBlock) {
+        this.setState({
+          asideBlock: this.getAsideBlock(),
+          mainBlock: this.getMainBlock()
+        })
+      }
+    }, this.props.config.interval)
+
+    document.addEventListener('keydown', (e) => {
+      console.log('keydown', e.which)
+    }, false)
+
+    document.addEventListener('keyup', (e) => {
+      console.log('keyup', e.which)
+    }, false)
   },
 
   getMainBlock() {
+    let start = this.props.config.viewMain.start.slice()
+
     return assign({}, this.state.asideBlock, {
-      start: configMain.start.slice(),
-      position: blockController.getPosition({
-        start: configMain.start.slice(),
-        coordinates: this.state.asideBlock.coordinates
-      })
+      start: start.slice(),
+      position: blockController.getPosition(
+        start.slice(),
+        this.state.asideBlock.coordinates
+      )
     })
   },
 
   getAsideBlock() {
-    return blockController.getRandomBlock(configAside.start.slice())
+    return blockController.getRandomBlock(this.props.config.viewAside.start.slice())
   },
 
-  getMainBlockMoveData(direction) {
-    if (!this.state.mainBlock) return;
+  getTestMoveBlockData(direction) {
+    if (!this.state.mainBlock) return
 
     let start
     let block = this.state.mainBlock
@@ -59,40 +81,34 @@ let ViewContent = createClass({
         break;
       case 'up':
         start = [block.start[0], block.start[1]]
-        let data = blockController.getShapeNextBlockData(block)
+        let data = blockController.getNextBlockData(block)
         coordinates = data.coordinates
         index = data.index
         break;
     }
 
     return {
+      direction: direction,
       index: index,
       start: start,
       coordinates: coordinates
     }
   },
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      if (!this.state.mainBlock) {
-        this.setState({
-          asideBlock: this.getAsideBlock(),
-          mainBlock: this.getMainBlock()
-        })
-      }
-    }, this.props.interval)
-  },
-
   render () {
+    // testMoveBlockData={this.getTestMoveBlockData()}
+    let config = this.props.config
     return (
       <div className="view-content">
         <ViewMain
-          moveData={this.getMainBlockMoveData()}
-          start={this.state.mainStart}
+          config={this.props.config.viewMain}
           direction={this.state.direction}
+          rows={blockController.getContainerRows(config.viewMain.rows, config.viewMain.cellsEachRow)}
           block={this.state.mainBlock}/>
         <ViewAside
+          config={this.props.config.viewAside}
           points={this.state.points}
+          rows={blockController.getContainerRows(config.viewAside.rows, config.viewAside.cellsEachRow)}
           block={this.state.asideBlock}/>
       </div>
     )
