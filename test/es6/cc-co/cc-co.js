@@ -4,7 +4,15 @@ var pSlice = Array.prototype.slice;
 module.exports = co["default"] = co;
 
 /**
- * gen could be generator or a generator function
+ * gen could be a generator or a generator function
+ * ---------------------------------------------
+ * return yield {can be converted to be Promise} value :to do sth
+ * => promise is to resolve {yielded value} to thenable function
+ * => then -> onFulfilled({yielded value})
+ * => passed to gen.next({yielded value})
+ * => ret.value should be {yielded value}
+ * => ret.done -> true :as return is the final sign within the gen
+ * => co(gen).then({yielded value})
  */
 function co(gen) {
   var args = pSlice.call(arguments, 1);
@@ -48,6 +56,7 @@ function co(gen) {
       if (ret.done) {
         return resolve(ret.value);
       }
+      // console.log(ret.value);
 
       var promise = toPromise(ret.value);
       if (promise && isPromise(promise)) {

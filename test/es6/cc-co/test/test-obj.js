@@ -1,5 +1,5 @@
-
 // "../../generator/co"
+
 var co = require("../cc-co");
 
 co(function *() {
@@ -10,6 +10,7 @@ co(function *() {
         cb(null, 100);
       }, 1000);
     },
+    aaa: 10,
     y: [
       new Promise(function (a, b) {
         setTimeout(() => {

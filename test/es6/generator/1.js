@@ -1,5 +1,5 @@
 function *gen1() {
-  yield 1;
+  return yield 1;
   yield 2;
   return 3;
 }
